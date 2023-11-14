@@ -13,10 +13,19 @@ const useSubjectStore = defineStore('subject', {
     async fetchSubjects() {
       this.subjects = await requests.post('/SearchSubjects/');
     },
-    async fetchListUsers() {
+    async fetchListUsers2() {
       const result = await requests.post('/ListUsers', {});
       this.users = result.ListUsersResult;
       await this.fetchListSubjects()
+    },
+    async fetchListUsers(group: string | null) {
+      const result = await requests.post('/SearchSubjects', {
+        filter: group,
+        endDateUTC: new Date().toISOString(),
+        size: 50
+      });
+      this.subjects = result.SearchSubjectsResult.value;
+      // await this.fetchListSubjects()
     },
     async fetchListSubjects() {
       let subjects:ISubject[]  = []

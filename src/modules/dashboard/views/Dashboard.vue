@@ -32,6 +32,7 @@
 
   const fetchListAlarms = async () => {
     // const dates = JSON.parse(JSON.stringify(toRaw(date)))
+    await fetchListUsers(groupSelected.value)
     await fetchAlarms(date.value, groupSelected.value);
   };
 
